@@ -1,0 +1,10 @@
+apt update && apt install -y mariadb-server wget php-fpm php-mysql nginx vim
+ln -fs /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.2/phpMyAdmin-4.9.2-all-languages.tar.gz && tar -zxvf phpMyAdmin-4.9.2-all-languages.tar.gz &&
+    mv phpMyAdmin-4.9.2-all-languages /var/www/phpMyAdmin && chown -R www-data:www-data /var/www/phpMyAdmin
+service mysql start &&  mysql -u root -e "CREATE USER 'adem'@'localhost' IDENTIFIED BY 'adem123';"
+wget http://wordpress.org/latest.tar.gz && tar xzvf latest.tar.gz && mv wordpress /var/www/wordpress && chown -R www-data:www-data /var/www/wordpress &&
+    service mysql start &&  mysql -u root -padem123 -e  "CREATE DATABASE wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO adem@localhost; FLUSH PRIVILEGES;"
+service nginx start && service php7.3-fpm start && service mysql star
+
+
